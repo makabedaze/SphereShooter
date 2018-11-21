@@ -1,0 +1,37 @@
+@startuml
+    class DebugInput
+    {
+
+    }
+    DebugInput ..d|> IInput
+
+    interface IInput
+    {
+       + Action<Vector3> OnInputRightStick
+       + Action<Vector3> OnInputLeftStick
+    }
+     
+    class PlayerCore
+    {
+    }
+    PlayerCore ..u> IInput
+    PlayerCore ..r|> IDamageable
+    PlayerCore ..r|> IDieSable
+
+    class PlayerMovement
+    { 
+      - Turn()
+      - Move()
+    }
+    PlayerMovement ..u> PlayerCore
+
+    interface IDamageable
+    {
+        + TakeDamage(T damageTaken)
+    }
+    
+    interface IDieable
+    {
+        + Die()
+    }
+@enduml
