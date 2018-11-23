@@ -5,6 +5,7 @@ public class PlayerCore : MonoBehaviour, IDamageable<int>, IDieable
 {
 	public Action<Vector3> OnInputRightStick { get; set; }
 	public Action<Vector3> OnIntputLeftStick { get; set; }
+	public Action OnInputAttackButton { get; set; }
 	public Action<int> OnTakeDamage { get; set; }
 	public Action OnDead { get; set; }
 
@@ -13,15 +14,16 @@ public class PlayerCore : MonoBehaviour, IDamageable<int>, IDieable
 		var input = GameObject.FindWithTag(Constants.INPUT).GetComponent<IInput>();
 		input.OnInputRightStick += OnInputRightStick;
 		input.OnInputLeftStick += OnIntputLeftStick;
+		input.OnInputAttackButton += OnInputAttackButton;
 	}
 
 	public void TakeDamage(int value)
 	{
-		OnTakeDamage(value);
+		OnTakeDamage.NullSafe(value);
 	}
 
 	public void Die()
 	{
-		OnDead();
+		OnDead.NullSafe();
 	}
 }

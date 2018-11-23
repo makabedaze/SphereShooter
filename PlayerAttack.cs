@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
+	public Action OnInputAttackButton { get; set; }
 
-	// Use this for initialization
-	void Initialize () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	void Awake()
+	{
+		var core = GetComponent<PlayerCore>();
+		core.OnInputAttackButton += OnInputAttackButton;
+		core.OnInputAttackButton += () => Debug.Log("Bang!");
 	}
 }
