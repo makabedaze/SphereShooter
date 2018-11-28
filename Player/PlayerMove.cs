@@ -3,17 +3,21 @@
 [RequireComponent(typeof(PlayerCore))]
 public class PlayerMove : MonoBehaviour
 {
+	private IInput input;
 	[SerializeField]
 	private float _speed = 0.5f;
 	private Transform _transform;
 
 	void Awake()
 	{
-		_transform = this.transform;
+		input = GameObject.FindWithTag(Constants.INPUT).GetComponent<IInput>();
+		
+		_transform = transform;
+	}
 
-		var core = GetComponent<PlayerCore>();
-		core.OnIntputLeftStick += Move;
-		core.OnInputRightStick += Turn;
+	void Update()
+	{
+		Move(input.OnInputLeftStick);
 	}
 
 	public void Move(Vector3 inputValue)
