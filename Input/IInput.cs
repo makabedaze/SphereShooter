@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public interface IInput
 {
-	Vector3 OnInputRightStick { get; }
-	Vector3 OnInputLeftStick { get; }
-	bool OnPressAttackButton { get; }
+	Vector3 InputRightStick { get; }
+	Vector3 InputLeftStick { get; }
+	bool IsPressAttackButton { get; }
 }

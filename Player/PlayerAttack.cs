@@ -1,21 +1,22 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour {
-	private IInput input;
+public class PlayerAttack : MonoBehaviour,IAttacker {
+	private IInput _input;
+	public Id AttackerId { get; } = Id.Player;
 	[SerializeField]
-	private Weapon weapon;
+	private Weapon _weapon;
 
-	void Awake()
+	private void Awake()
 	{
-		input = GameObject.FindWithTag(Constants.INPUT).GetComponent<IInput>();
+		_input = GameObject.FindWithTag(Constants.INPUT).GetComponent<IInput>();
+		_weapon.Initialize(this);
 	}
 
-	void Update()
+	private void Update()
 	{
-		if (input.OnPressAttackButton) 
+		if (_input.IsPressAttackButton) 
 		{
-			weapon.Fire();
+			_weapon.Fire();
 		}
 	}
 }

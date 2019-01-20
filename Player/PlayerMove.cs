@@ -1,28 +1,26 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(PlayerCore))]
 public class PlayerMove : MonoBehaviour
 {
-	private IInput input;
+	private IInput _input;
 	[SerializeField]
 	private float _speed = 0.5f;
 	private Transform _transform;
 
-	void Awake()
+	private void Awake()
 	{
-		input = GameObject.FindWithTag(Constants.INPUT).GetComponent<IInput>();
-		
+		_input = GameObject.FindWithTag(Constants.INPUT).GetComponent<IInput>();
 		_transform = transform;
 	}
 
-	void Update()
+	private void Update()
 	{
-		Move(input.OnInputLeftStick);
+		Move(_input.InputLeftStick);
 	}
 
 	public void Move(Vector3 inputValue)
 	{
-		_transform.position += inputValue.normalized * _speed;
+		_transform.position += inputValue.normalized * _speed * Time.deltaTime;
 	}
 
 	private void Turn(Vector3 inputValue)

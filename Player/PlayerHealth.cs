@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour {
-
+public class PlayerHealth : MonoBehaviour
+{
 	// Use this for initialization
-	void Initialize () {
-		
+	void Initialize()
+	{
+
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		
+	void Update()
+	{
+
 	}
 }
