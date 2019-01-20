@@ -1,37 +1,75 @@
 @startuml
+namespace Input{
     class DebugInput
     {
-
     }
     DebugInput ..d|> IInput
-
-    interface IInput
-    {
-       + Action<Vector3> OnInputRightStick
-       + Action<Vector3> OnInputLeftStick
-    }
-     
-    class PlayerCore
+    class JoyStickInput
     {
     }
-    PlayerCore ..u> IInput
-    PlayerCore ..r|> IDamageable
-    PlayerCore ..r|> IDieSable
+    JoyStickInput ..d|> IInput
+        interface IInput
+    {
+       + Vector3 InputRightStick
+       + Vector3 InputLeftStick
+       + Vector3 PressAttackButton
+    }
+}
 
+namespace Player{
+    class PlayerHealth
+    {
+
+    }
+    
     class PlayerMovement
     { 
+          
       - Turn()
       - Move()
     }
-    PlayerMovement ..u> PlayerCore
-
-    interface IDamageable
-    {
-        + TakeDamage(T damageTaken)
-    }
+    PlayerMovement ..u> Input.IInput
     
-    interface IDieable
-    {
-        + Die()
+    class PlayerAttack
+    { 
+      - Attack()
     }
+    PlayerAttack ..u> Input.IInput
+    PlayerAttack ..> Weapon.Weapon
+}
+
+namespace Weapon{
+    abstract class Weapon
+    {
+        + Fire()
+    }
+    Weapon ..> Bullet
+
+    abstract class Bullet
+}
+
+namespace Enemy{
+    class EnemyHealth
+    {
+
+    }
+}
+
+interface IDamageable
+{
+    + TakeDamage(T damageTaken)
+}
+Player.PlayerHealth ..|> IDamageable
+Enemy.EnemyHealth ..|> IDamageable
+
+
+interface IDieable
+{
+    + Die()
+}
+Player.PlayerHealth ..|> IDieable
+Enemy.EnemyHealth ..|> IDieable
+
+
+
 @enduml
