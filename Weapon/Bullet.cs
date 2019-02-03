@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
 	
 	private void Update()
 	{
-		transform.position += _direction * _speed;
+		transform.SphericalMove(Vector3.forward,_speed);
 	}
 
 	private void OnTriggerEnter(Collider hitTarget)

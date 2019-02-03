@@ -27,11 +27,16 @@ public class PlayerAnimation : MonoBehaviour
 		var axis = Vector3.Cross(_playerTransform.forward, _input.InputLeftStick).y < 0 ? 1 : -1;
 		//正面と入力方向のなす角
 		var angle = Vector3.Angle(_playerTransform.forward, _input.InputLeftStick);
-
 		var step = _rotationSpeed * Time.deltaTime;
 		var targetRotation = Quaternion.Euler(0, 0, _maxRotateAngle * GetClosenessToRightAngle(angle) * axis);
+
+		if (angle < 30) 
+		{
+			targetRotation = Quaternion.Euler(0, 0, 0);	
+		}
+
 		//stepに応じてtargetRotationに向けて傾ける
-		_playerTransform.rotation = Quaternion.RotateTowards(_playerTransform.rotation, targetRotation, step);
+		_playerTransform.localRotation = Quaternion.RotateTowards(_playerTransform.localRotation, targetRotation, step);
 	}
 
 	//どれだけ直角に近いか割合を返す
