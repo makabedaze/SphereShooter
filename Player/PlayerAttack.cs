@@ -1,20 +1,27 @@
 ﻿using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour,IAttacker {
-	private IInput _input;
+/// <summary>
+/// Weaponにプレイヤーの入力を伝える
+/// </summary>
+public class PlayerAttack : MonoBehaviour, IAttacker
+{
 	public Id AttackerId { get; } = Id.Player;
 	[SerializeField]
 	private Weapon _weapon;
 
-	private void Awake()
+	public void Initialize()
 	{
-		_input = GameObject.FindWithTag(Constants.INPUT).GetComponent<IInput>();
 		_weapon.Initialize(this);
 	}
 
-	private void Update()
+	/// <summary>
+	/// 入力をもとに移動、旋回をする
+	/// </summary>
+	/// <param name="leftStick"></param>
+	/// <param name="rightStick"></param>
+	public void PlayerInput(bool isPressAttackButton)
 	{
-		if (_input.IsPressAttackButton) 
+		if (isPressAttackButton)
 		{
 			_weapon.Fire();
 		}

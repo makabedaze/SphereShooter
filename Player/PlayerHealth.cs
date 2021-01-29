@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
 	// Use this for initialization
-	void Initialize()
+	public void Initialize()
 	{
 
 	}

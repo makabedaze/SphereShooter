@@ -21,6 +21,13 @@ namespace Player{
     {
 
     }
+    PlayerHealth ..u> Player.PlayerCore
+
+    class PlayerCore
+    {
+
+    }
+    PlayerCore ..u> Input.IInput
     
     class PlayerMovement
     { 
@@ -28,14 +35,13 @@ namespace Player{
       - Turn()
       - Move()
     }
-    PlayerMovement ..u> Input.IInput
+    PlayerMovement ..u> Player.PlayerCore
     
     class PlayerAttack
     { 
       - Attack()
     }
-    PlayerAttack ..u> Input.IInput
-    PlayerAttack ..> Weapon.Weapon
+    PlayerAttack ..u> Player.PlayerCore
 }
 
 namespace Weapon{
